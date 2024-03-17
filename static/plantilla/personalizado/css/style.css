@@ -1,0 +1,46 @@
+/*Logo*/
+.logo{
+    width: 55px;
+}
+.logo-title{
+    width: 130px;
+}
+
+/*Color texto e iconos*/
+.sidebar-nav ul .sidebar-item .sidebar-link, .sidebar-nav ul .sidebar-item .sidebar-link {
+    color: black !important;
+}
+
+table {
+    color: #444343 !important;
+}
+
+b, strong {
+    font-weight: bold !important;
+}
+
+/*.sidebar-nav ul .sidebar-item .sidebar-link .feather-icon, .sidebar-nav ul .sidebar-item .sidebar-link i, .sidebar-nav ul .sidebar-item .sidebar-link .feather-icon, .sidebar-nav ul .sidebar-item .sidebar-link i {*/
+/*    color: black!important;*/
+/*}*/
+
+/*Fondo topbar*/
+.topbar {
+    background: white !important;
+}
+
+/*Fondo container*/
+.page-wrapper {
+    background: #efecec;
+}
+
+
+/*Position container*/
+.page-wrapper > .container-fluid {
+    padding: 35px;
+    min-height: calc(100vh - 137px);
+}
+
+/*Formularios*/
+.form-control {
+    border: 1px solid #91a7bd;
+}

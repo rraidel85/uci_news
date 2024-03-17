@@ -1,0 +1,92 @@
+{% load static %}
+{% load project_config %}
+{% project_config as config %}
+
+<!DOCTYPE html>
+<html class="h-100" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{{ config.title }}</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static config.icon %}">
+
+    <!-- Custom CSS -->
+    <link href="{% static 'errors/css/style.css' %}" rel="stylesheet">
+
+    <style>
+        body {
+            background: url("{% static 'plantilla/assets/images/login/bg-themes/2.png' %}") no-repeat center center fixed !important;
+        }
+    </style>
+</head>
+
+<body class="h-100">
+
+<!--*******************
+    Preloader start
+********************-->
+<div id="preloader">
+    <div class="loader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"/>
+        </svg>
+    </div>
+</div>
+<!--*******************
+    Preloader end
+********************-->
+
+
+<div class="login-form-bg h-100">
+    <div class="container h-100">
+        <div class="row justify-content-center h-100">
+            <div class="col-xl-6">
+                <div class="error-content">
+                    <div class="card mb-0">
+                        <div class="card-body text-center">
+                            <h1 class="error-text text-primary">
+                                {% block error_number %}
+                                    500
+                                {% endblock %}
+                            </h1>
+                            <h3 class="mt-4"><i class="fa fa-thumbs-down text-danger"></i>
+                                {% block error_title %}
+                                    Error en el servidor
+                                {% endblock %}
+                            </h3>
+                            <h5>
+                                {% block error_description %}
+                                    Ha ocurrido un problema en el servidor. Inténtelo más tarde.
+                                {% endblock %}
+                            </h5>
+                            <form class="mt-5 mb-5">
+
+                                <div class="text-center mb-4 mt-4"><a href="{% url 'bscmes:index' %}"
+                                                                      class="btn btn-primary">
+                                    Ir a la página principal</a>
+                                </div>
+                            </form>
+                            <div class="text-center">
+                                <p>Copyright © Desarrollado por el <strong>Departamento de Desarrollo de
+                                    Software</strong>,
+                                    <strong>Universidad de Ciego de Ávila</strong>, 2021</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--**********************************
+    Scripts
+***********************************-->
+<script src="{% static 'errors/js/common.min.js' %}"></script>
+<script src="{% static 'errors/js/custom.min.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<script>
+    {% for field in form %}
+        $('#{{ field.id_for_label}}').addClass('form-control');
+        {% if field.errors %}
+            $('#{{ field.id_for_label }}').addClass('is-invalid');
+        {% endif %}
+    {% endfor %}
+
+    $('.helper-form').addClass('badge badge-default badge-warning form-text');
+    $('.helper-form').css('font-size', '90%').css('white-space', 'initial');
+    $('.helper-form').css('text-align', 'left');
+    $('.helper-form').children('ul').css('list-style', 'none');
+    $('.helper-form').children('ul').css('padding-inline-start', '0px');
+    $('.helper-form').children('ul').css('padding-top', '5px');
+    $('.helper-form').children('ul').children('li').css('margin-bottom', '8px');
+
+</script>
