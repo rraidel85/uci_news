@@ -195,9 +195,21 @@
                             <img src="{% static 'plantilla/assets/images/users/user.svg' %}" alt="user"
                                  class="rounded-circle"
                                  width="40">
-                            <span class="ml-2 d-none d-lg-inline-block"><span>Bienvenido(a),</span> <span
-                                    class="text-dark">{{ user.username }}</span> <i data-feather="chevron-down"
+                            <span class="ml-2 d-none d-lg-inline-block">
+                                {% if not user.is_authenticated %}
+                                <span>Bienvenido(a), lector</span> 
+                                {% else %}
+                                <span>Bienvenido(a),</span>
+                                {% endif %}</span>
+                                
+                                <span
+                                    class="text-dark">{{ user.username }}</span> 
+                                    
+                                    
+                                        
+                                    <i data-feather="chevron-down"
                                                                                     class="svg-icon"></i></span>
+                                        
                         </a>
                         <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
                             <a class="dropdown-item" href=""><i data-feather="user"
@@ -208,16 +220,14 @@
                                                                                                   class="svg-icon mr-2 ml-1"></i>
                                 Cambiar contraseña</a>
 
-                            <a class="dropdown-item" href=""><i
-                                    data-feather="settings"
-                                    class="svg-icon mr-2 ml-1"></i>
-                                Editar perfil</a>
-
-
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href=""><i data-feather="power"
-                                                                                           class="svg-icon mr-2 ml-1"></i>
-                                Cerrar sesión</a>
+                            <form method="post" action="{% url 'usuarios:logout' %}">
+                                {% csrf_token %}
+                                <button type="submit" class="dropdown-item">
+                                    <i data-feather="power" class="svg-icon mr-2 ml-1"></i>
+                                    Cerrar sesión
+                                </button>
+                            </form>
                         </div>
                     </li>
                     <!-- ============================================================== -->

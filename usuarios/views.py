@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import views
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
@@ -29,5 +29,6 @@ class ProfileDetailView(LoginRequiredMixin, View):
         return render(request, template_name='usuarios/profile/profile_detalles.html')
 
 
-
+class CustomLogoutView(LogoutView):
+    next_page = reverse_lazy('news:index')
 
