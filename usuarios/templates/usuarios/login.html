@@ -1,0 +1,82 @@
+{% extends 'base_login.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <!-- Authentication card start -->
+            <div class="login-card card-block auth-body mr-auto ml-auto">
+                <form class="md-float-material" method="post">
+                    {% csrf_token %}
+                    {##}
+                    {#                    <div class="text-center">#}
+                    {#                        <img src="{% static 'plantilla/assets/images/login/logoMES.png' %}"#}
+                    {#                             alt="logo.png">#}
+                    {#                    </div>#}
+
+                    <div class="auth-box">
+                        <div class="row m-b-20">
+                            <div class="col-md-6">
+                                <h3 class="text-left txt-primary">Iniciar sesión</h3>
+                            </div>
+                            <div class="col-md-6 logo-mes">
+                                <img width="180px" src="{% static 'plantilla/assets/images/login/logoMES.png' %}"
+                                     alt="logo.png">
+                            </div>
+                        </div>
+                        <hr/>
+                        {% if form.errors %}
+                            <p class="text-center text-danger">Credenciales incorrectas. Inténtelo de nuevo.</p>
+                        {% endif %}
+
+                        {% for field in form.visible_fields %}
+                            <div class="text-left">
+                                {{ field.label_tag }}
+                            </div>
+                            <div class="input-group">
+                                {{ field }}
+
+                                {% if field.errors %}
+                                    {% for error in field.errors %}
+                                        <p class="text-danger">{{ error|escape }}</p>
+                                    {% endfor %}
+                                {% endif %}
+                                <span class="md-line"></span>
+                            </div>
+                        {% endfor %}
+
+                        <div class="row m-t-30">
+                            <div class="col-md-12">
+                                <button type="submit"
+                                        class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">
+                                    Iniciar sesión
+                                </button>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <p class="text-inverse text-left m-b-0">Sistema Informático de apoyo a la Gestión
+                                    Estratégica</p>
+                                <p class="text-inverse text-left"><b>MES Ministerio Educación Superior. Cuba</b></p>
+                            </div>
+                            <div class="col-md-2">
+                                <img style="width: 35px" src="{% static 'plantilla/assets/images/login/MES.png' %}"
+                                     alt="small-logo.png">
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+                <!-- end of form -->
+            </div>
+            <!-- Authentication card end -->
+        </div>
+        <!-- end of col-sm-12 -->
+    </div>
+    <!-- end of row -->
+{% endblock %}
+
+{% block page_js %}
+    {% include "form_generic/form_generic_script.html" %}
+{% endblock %}
