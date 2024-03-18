@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <style>
+        .bg-gradient-dark {
+            background: linear-gradient(to top, #8971ea, #7f72ea, #7574ea, #6a75e9, #5f76e8);
+        }
+    </style>
+{% endblock %}
+
+{% block breadcrum %}
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-7 align-self-center">
+                <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">
+                    {{ saludo }}
+                </h3>
+                <div class="d-flex align-items-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb m-0 p-0">
+                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="card bg-gradient-dark card-img-holder text-white" style="margin-bottom: 30px;padding: 30px;">
+        <div class="row align-items-center">
+            <div class="col-md-4 text-center">
+                <img src="{% static 'plantilla/assets/images/description.svg' %}" alt="" style="width: 100%;">
+            </div>
+            <div class="col-md-7">
+                <h2 class="mb-10">
+                    Sistema Informático de apoyo a la Gestión Estratégica
+                </h2>
+                <h3 class="mt-4">Un sistema informático de apoyo a la gestión estratégica de
+                    indicadores del Ministerio de Educación Superior
+                    creado
+                    por el Departamento de Desarrollo de la Universidad de Ciego de Ávila.
+                </h3>
+
+                {#                <button class="btn btn-info">Administrar</button>#}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -61,7 +61,7 @@
                 <!-- ============================================================== -->
                 <div class="navbar-brand">
                     <!-- Logo icon -->
-                    <a href="{% url 'bscmes:index' %}">
+                    <a href="{% url 'news:index' %}">
                         <b class="logo-icon">
                             <!-- Dark Logo icon -->
                             <img src="{% static 'plantilla/assets/images/logo/logo.svg' %}" alt="homepage"
@@ -200,22 +200,22 @@
                                                                                     class="svg-icon"></i></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
-                            <a class="dropdown-item" href="{% url 'usuarios:perfil' %}"><i data-feather="user"
+                            <a class="dropdown-item" href=""><i data-feather="user"
                                                                                            class="svg-icon mr-2 ml-1"></i>
                                 Perfil</a>
 
-                            <a class="dropdown-item" href="{% url 'usuarios:cambiar_clave' %}"><i data-feather="repeat"
+                            <a class="dropdown-item" href=""><i data-feather="repeat"
                                                                                                   class="svg-icon mr-2 ml-1"></i>
                                 Cambiar contraseña</a>
 
-                            <a class="dropdown-item" href="{% url 'usuarios:editar_perfil' %}"><i
+                            <a class="dropdown-item" href=""><i
                                     data-feather="settings"
                                     class="svg-icon mr-2 ml-1"></i>
                                 Editar perfil</a>
 
 
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{% url 'usuarios:logout' %}"><i data-feather="power"
+                            <a class="dropdown-item" href=""><i data-feather="power"
                                                                                            class="svg-icon mr-2 ml-1"></i>
                                 Cerrar sesión</a>
                         </div>
