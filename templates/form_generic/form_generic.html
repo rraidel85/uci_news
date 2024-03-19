@@ -1,6 +1,6 @@
 {{ form.non_field_errors }}
 <div class="form-group">
-    <form method="post">{% csrf_token %}
+    <form enctype="multipart/form-data" method="post">{% csrf_token %}
 
         <div class="row">
             {% for field in form.visible_fields %}
