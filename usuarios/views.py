@@ -14,7 +14,7 @@ class UserLoginView(LoginView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('news:index')
+        return reverse_lazy('news:list')
 
 class PasswordChangeDoneView(LoginRequiredMixin, views.PasswordChangeDoneView):
 
@@ -30,5 +30,5 @@ class ProfileDetailView(LoginRequiredMixin, View):
 
 
 class CustomLogoutView(LogoutView):
-    next_page = reverse_lazy('news:index')
+    next_page = reverse_lazy('news:list')
 
