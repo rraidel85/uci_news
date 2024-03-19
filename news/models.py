@@ -20,6 +20,7 @@ class News(models.Model):
     pub_date = models.DateField(verbose_name='Fecha de publicación')
     source = models.CharField(max_length=255, verbose_name='Fuente')
     gender = models.CharField(max_length=255, verbose_name='Género')
+    language = models.CharField(max_length=255, verbose_name='Idioma', default="Español")
     content = models.TextField(verbose_name='Contenido')
     image = models.ImageField(upload_to='news/', verbose_name='Imagen')
     ideological_stance = models.CharField(max_length=255, verbose_name='Postura ideológica')
