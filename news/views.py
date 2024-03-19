@@ -38,7 +38,7 @@ class NewsCreateView(PermissionRequiredMixin, CreateView):
 class NewsUpdateView(PermissionRequiredMixin, UpdateView):
     model = News
     fields = '__all__'
-    template_name = 'news/news_form.html'
+    template_name = 'news/news_update_form.html'
     permission_required = 'news.change_news'
 
     def form_valid(self, form):
