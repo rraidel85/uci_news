@@ -1,4 +1,4 @@
-from .models import News
+from .models import News, Category
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib import messages
@@ -62,3 +62,61 @@ class NewsDeleteView(PermissionRequiredMixin, DeleteView):
         item.delete()
         messages.success(self.request, 'Noticia eliminada correctamente')
         return HttpResponseRedirect(reverse('news:list'))
+    
+    
+#Category    
+class CategoryListView(ListView):
+    model = Category 
+    template_name = 'category/category_list.html'
+    context_object_name = 'categories'
+    
+class CategoryDetailView(PermissionRequiredMixin, DetailView):
+    model = Category
+    template_name = 'category/category_detail.html'
+    permission_required = 'news.view_category'
+    context_object_name = 'category'
+
+class CategoryCreateView(PermissionRequiredMixin, CreateView):
+    model = Category
+    fields = '__all__'
+    template_name = 'category/category_form.html'
+    permission_required = 'news.add_category'
+
+    def form_valid(self, form):
+        messages.success(self.request, 'Temática creada correctamente.')
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, 'Existen errores en el formulario.')
+        return super().form_invalid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('news:category_detail', args=[self.object.id])
+
+class CategoryUpdateView(PermissionRequiredMixin, UpdateView):
+    model = Category
+    fields = '__all__'
+    template_name = 'category/category_update_form.html'
+    permission_required = 'news.change_category'
+
+    def form_valid(self, form):
+        messages.success(self.request, 'Temática actualizada correctamente.')
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, 'Existen errores en el formulario.')
+        return super().form_invalid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('news:category_detail', args=[self.object.id])
+
+class CategoryDeleteView(PermissionRequiredMixin, DeleteView):
+    model = Category
+    template_name = 'category/category_confirm_delete.html'
+    permission_required = 'news.delete_category'
+
+    def get(self, request, pk):
+        item = get_object_or_404(News, pk=pk)
+        item.delete()
+        messages.success(self.request, 'Temática eliminada correctamente')
+        return HttpResponseRedirect(reverse('news:category_list'))

@@ -13,10 +13,10 @@ urlpatterns = [
     path('noticias/eliminar/<int:pk>/', views.NewsDeleteView.as_view(), name='delete'),
     
     #Category
-    path('tematicas', views.NewsListView.as_view(), name='category_list'),
-    path('tematicas/crear/', views.NewsCreateView.as_view(), name='category_create'),
-    path('tematicas/editar/<int:pk>/', views.NewsUpdateView.as_view(), name='category_edit'),
-    path('tematicas/<int:pk>/', views.NewsDetailView.as_view(), name='category_detail'),
-    path('tematicas/eliminar/<int:pk>/', views.NewsDeleteView.as_view(), name='category_delete'),
+    path('tematicas', views.CategoryListView.as_view(), name='category_list'),
+    path('tematicas/crear/', views.CategoryCreateView.as_view(), name='category_create'),
+    path('tematicas/editar/<int:pk>/', views.CategoryUpdateView.as_view(), name='category_edit'),
+    path('tematicas/<int:pk>/', views.CategoryDetailView.as_view(), name='category_detail'),
+    path('tematicas/eliminar/<int:pk>/', views.CategoryDeleteView.as_view(), name='category_delete'),
 ]
 
