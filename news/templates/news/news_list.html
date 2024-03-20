@@ -28,15 +28,12 @@
 
 {% block content %}
     <div class="col-12">
+        {% for n in news %}
         <div class="card">
             <div class="card-body">
                 <div style="display:flex; justify-content: space-between">
-                    <h5 class="card-title">Titulo de la noticia</h5>
+                    <h5 class="card-title" style="font-weight:bold">{{ n.title }}</h5>
                     <div style="display:flex; gap: 1rem">
-                        <a title="Detalles" class="btn btn-outline-primary btn-rounded"
-                                           href="{% url 'news:detail' 1 %}">
-                                            <i class="fa fa-search"></i>
-                                        </a>
                                         <a title="Editar" class="btn btn-outline-success btn-rounded"
                                            href="{% url 'news:edit' 1 %}">
                                             <i class="fa fa-pencil-alt"></i>
@@ -50,19 +47,20 @@
                                         </a>
                     </div>
                 </div>
-                <div class="media">
-                    <img class="align-self-center w-25 mr-3" src="assets/images/big/img1.jpg"
-                        alt="Generic placeholder image">
-                    <div class="media-body">
-                        <h5 class="mt-0">Fecha publicacion</h5>
-                        <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-                            scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-                            vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
-                            vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                
+                
+                    <div class="media">
+                        <img class="align-self-center w-25 mr-3" src="{{ n.image.url }}"
+                            alt="Imagen de noticia">
+                        <div class="media-body">
+                            <h5 class="mt-0" style="margin-bottom: 1rem;">{{ n.pub_date }}</h5>
+                            <p>{{ n.content }}</p>
+                        </div>
                     </div>
-                </div>
+                <div style="display:flex; flex-direction:row-reverse"><a class="btn btn-primary" href="{% url 'news:detail' 1 %}">Más información</a></div>
             </div>
         </div>
+        {% endfor %}
     </div>
 
 {% endblock %}
