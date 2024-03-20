@@ -9,8 +9,12 @@ from django.http import HttpResponseRedirect
 class NewsListView(ListView):
     model = News
     template_name = 'news/news_list.html'
-    # permission_required = 'news.view_news'
     context_object_name = 'news'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
     
 class NewsDetailView(PermissionRequiredMixin, DetailView):
     model = News
