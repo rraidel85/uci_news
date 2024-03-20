@@ -11,7 +11,7 @@ from django.template.loader import render_to_string
 
 def load_news(request):
     category = request.GET.get('category', None)
-    order = request.GET.get('order', 'asc')
+    order = request.GET.get('order', 'desc')
     
     if category != 'any':
         news_items = News.objects.filter(category_id=category).order_by('-pub_date' if order == 'desc' else 'pub_date')
