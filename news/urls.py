@@ -7,6 +7,7 @@ app_name = 'news'
 
 urlpatterns = [
     path('', views.NewsListView.as_view(), name='list'),
+    path('noticias/administrar/', views.NewsListAdminView.as_view(), name='news_admin'),
     path('noticias/crear/', views.NewsCreateView.as_view(), name='create'),
     path('noticias/editar/<int:pk>/', views.NewsUpdateView.as_view(), name='edit'),
     path('noticias/<int:pk>/', views.NewsDetailView.as_view(), name='detail'),

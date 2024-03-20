@@ -22,22 +22,12 @@ def custom_menu(user=None):
     """
 
     menu = [
-        Menu('Inicio', 'home', '', None, []),
+        Menu('Inicio', 'home', reverse('news:list'), None, []),
         'Divider',
-        ('Category', 'ADMINISTRACIÓN'),  # Category name
-        Menu('Procesos', 'bar-chart-2', None, None, [
-            Menu('Nuevo proceso', '', '', None),
-            Menu('Administrar', '', '', None),
-        ]),
-        Menu('Unidades orgánicas', 'disc', None, None, [
-            Menu('Nueva unidad orgánica', '', '', None),
-            Menu('Administrar', '', '', None),
-        ]),
-        Menu('Indicadores', 'list', None, None, [
-            Menu('Nuevo indicador', '', '', None),
-            Menu('Administrar', '', '', None),
-        ]),
-
+        Menu('Noticias', 'bar-chart-2', reverse('news:news_admin'), None),
+        Menu('Temáticas', 'bar-chart-2', reverse('news:category_list'), None),
+        'Divider',
+        Menu('Administración', 'bar-chart-2', '/admin', None, []),
     ]
 
     # if 'Administrador' in user.groups.get().name:

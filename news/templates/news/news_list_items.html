@@ -1,23 +1,9 @@
 {% for n in news %}
         <div class="card">
             <div class="card-body">
-                <div style="display:flex; justify-content: space-between">
-                    <h5 class="card-title" style="font-weight:bold">{{ n.title }}</h5>
-                    <div style="display:flex; gap: 1rem">
-                                        <a title="Editar" class="btn btn-outline-success btn-rounded"
-                                           href="{% url 'news:edit' n.id %}">
-                                            <i class="fa fa-pencil-alt"></i>
-                                        </a>
-                    <a title="Eliminar" class="btn btn-outline-danger btn-rounded"
-                                           data-toggle="modal"
-                                           data-target="#bs-example-modal-sm"
-                                           onclick="delete_modal('{% url 'news:delete' n.id %}')"
-                                           href="#">
-                                           <i class="fa fa-trash" style=""></i>
-                                        </a>
+                    <div style="display:flex; justify-content: space-between">
+                        <h5 class="card-title" style="font-weight:bold">{{ n.title }}</h5>
                     </div>
-                </div>
-                
                 
                     <div class="media">
                         <img class="align-self-center w-25 mr-3" src="{{ n.image.url }}"

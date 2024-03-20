@@ -9,31 +9,20 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 
-def load_news(request):
-    category = request.GET.get('category', None)
-    order = request.GET.get('order', 'desc')
-    
-    if category != 'any':
-        news_items = News.objects.filter(category_id=category).order_by('-pub_date' if order == 'desc' else 'pub_date')
-    else:
-        news_items = News.objects.all().order_by('-pub_date' if order == 'desc' else 'pub_date')
-
-    # context = {'news': news_items}
-    # html = render(request, 'news/news_list_items.html', context).content.decode('utf-8')
-
-    print(news_items)
-    html = render_to_string(
-            template_name="news/news_list_items.html", 
-            context={"news": news_items}
-        )
-
-    data_dict = {"html_from_view": html}
-
-    return JsonResponse(data=data_dict, safe=False)
-
 class NewsListView(ListView):
     model = News
     template_name = 'news/news_list.html'
+    context_object_name = 'news'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
+    
+class NewsListAdminView(PermissionRequiredMixin, ListView):
+    model = News
+    template_name = 'news/news_admin_list.html'
+    permission_required = 'news.view_news'
     context_object_name = 'news'
     
     def get_context_data(self, **kwargs):
@@ -62,7 +51,7 @@ class NewsCreateView(PermissionRequiredMixin, CreateView):
         return super().form_invalid(form)
 
     def get_success_url(self):
-        return reverse_lazy('news:detail', args=[self.object.id])
+        return reverse_lazy('news:news_admin')
 
 class NewsUpdateView(PermissionRequiredMixin, UpdateView):
     model = News
@@ -79,7 +68,7 @@ class NewsUpdateView(PermissionRequiredMixin, UpdateView):
         return super().form_invalid(form)
 
     def get_success_url(self):
-        return reverse_lazy('news:detail', args=[self.object.id])
+        return reverse_lazy('news:news_admin')
 
 class NewsDeleteView(PermissionRequiredMixin, DeleteView):
     model = News
@@ -90,13 +79,14 @@ class NewsDeleteView(PermissionRequiredMixin, DeleteView):
         item = get_object_or_404(News, pk=pk)
         item.delete()
         messages.success(self.request, 'Noticia eliminada correctamente')
-        return HttpResponseRedirect(reverse('news:list'))
+        return HttpResponseRedirect(reverse('news:news_admin'))
     
     
 #Category    
-class CategoryListView(ListView):
+class CategoryListView(PermissionRequiredMixin, ListView):
     model = Category 
     template_name = 'category/category_list.html'
+    permission_required = 'news.view_category'
     context_object_name = 'categories'
     
 class CategoryDetailView(PermissionRequiredMixin, DetailView):
@@ -120,7 +110,7 @@ class CategoryCreateView(PermissionRequiredMixin, CreateView):
         return super().form_invalid(form)
 
     def get_success_url(self):
-        return reverse_lazy('news:category_detail', args=[self.object.id])
+        return reverse_lazy('news:category_list')
 
 class CategoryUpdateView(PermissionRequiredMixin, UpdateView):
     model = Category
@@ -137,7 +127,7 @@ class CategoryUpdateView(PermissionRequiredMixin, UpdateView):
         return super().form_invalid(form)
 
     def get_success_url(self):
-        return reverse_lazy('news:category_detail', args=[self.object.id])
+        return reverse_lazy('news:category_list')
 
 class CategoryDeleteView(PermissionRequiredMixin, DeleteView):
     model = Category
@@ -149,3 +139,26 @@ class CategoryDeleteView(PermissionRequiredMixin, DeleteView):
         item.delete()
         messages.success(self.request, 'Temática eliminada correctamente')
         return HttpResponseRedirect(reverse('news:category_list'))
+    
+    
+def load_news(request):
+    category = request.GET.get('category', None)
+    order = request.GET.get('order', 'desc')
+    
+    if category != 'any':
+        news_items = News.objects.filter(category_id=category).order_by('-pub_date' if order == 'desc' else 'pub_date')
+    else:
+        news_items = News.objects.all().order_by('-pub_date' if order == 'desc' else 'pub_date')
+
+    # context = {'news': news_items}
+    # html = render(request, 'news/news_list_items.html', context).content.decode('utf-8')
+
+    print(news_items)
+    html = render_to_string(
+            template_name="news/news_list_items.html", 
+            context={"news": news_items}
+        )
+
+    data_dict = {"html_from_view": html}
+
+    return JsonResponse(data=data_dict, safe=False)
