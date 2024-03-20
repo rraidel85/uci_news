@@ -24,10 +24,11 @@ def custom_menu(user=None):
     menu = [
         Menu('Inicio', 'home', reverse('news:list'), None, []),
         'Divider',
-        Menu('Noticias', 'bar-chart-2', reverse('news:news_admin'), None),
-        Menu('Temáticas', 'bar-chart-2', reverse('news:category_list'), None),
+        Menu('Noticias', 'file-text', reverse('news:news_admin'), None),
+        Menu('Temáticas', 'copy', reverse('news:category_list'), None),
+        Menu('Reportes', 'bar-chart-2', '/admin', None, []),
         'Divider',
-        Menu('Administración', 'bar-chart-2', '/admin', None, []),
+        Menu('Administración', 'shield', '/admin', None, []),
     ]
 
     # if 'Administrador' in user.groups.get().name:
