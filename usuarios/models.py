@@ -7,5 +7,6 @@ class CustomUser(AbstractUser):
     number = models.CharField(max_length=10, verbose_name='Número')
     zone = models.CharField(max_length=255, verbose_name='Reparto')
     category = models.CharField(max_length=255, verbose_name='Categoría Científica', blank=True, null=True)
+    experience = models.IntegerField(verbose_name='Años de experiencia', blank=True, null=True)
     
     

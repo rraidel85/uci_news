@@ -31,7 +31,8 @@ class CustomUserAdmin(UserAdmin):
                     'street',
                     'number',
                     'zone',
-                    'category'
+                    'category',
+                    'experience'
                 ),
             },
         ),

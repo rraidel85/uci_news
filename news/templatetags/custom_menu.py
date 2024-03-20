@@ -26,7 +26,7 @@ def custom_menu(user=None):
         'Divider',
         Menu('Noticias', 'file-text', reverse('news:news_admin'), None),
         Menu('Temáticas', 'copy', reverse('news:category_list'), None),
-        Menu('Reportes', 'bar-chart-2', '/admin', None, []),
+        # Menu('Reportes', 'bar-chart-2', '/admin', None, []),
         'Divider',
         Menu('Administración', 'shield', '/admin', None, []),
     ]
