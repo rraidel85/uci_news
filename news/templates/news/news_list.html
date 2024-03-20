@@ -38,7 +38,7 @@
                                 <div class="form-group mb-4">
                                     <label class="mr-sm-2" for="filterCategory">Filtrar por temática</label>
                                     <select style="color:black" class="custom-select mr-sm-2" id="filterCategory">
-                                        <option selected>Seleccionar...</option>
+                                        <option value="any" selected>Todas las temáticas</option>
                                         {% for category in categories %}
                                             <option value="{{ category.id }}">{{ category.name }}</option>
                                         {% endfor %}
@@ -59,8 +59,11 @@
                 </div>
             </div>
         </div>
+        <div id="news-list">
+            {% include 'news/news_list_items.html' %}
+        </div>
     {% endif %}
-        {% for n in news %}
+        {% comment %} {% for n in news %}
         <div class="card">
             <div class="card-body">
                 <div style="display:flex; justify-content: space-between">
@@ -94,11 +97,40 @@
         </div>
         {% empty %}
             <h2 style="text-align:center; font-weight:bold;">No hay noticias para mostrar</h2>
-        {% endfor %}
+        {% endfor %} {% endcomment %}
     </div>
 
 {% endblock %}
 {% block page_js %}
     {% load modal_delete %}
     {% modal_delete %}
+    <script>
+        $(document).ready(function() {
+            // Load initial news items
+            const newsList = $('#news-list')
+            loadNews();
+
+            // Handle category filter change
+            $('#filterCategory').change(function() {
+                loadNews();
+            });
+
+            // Handle date order change
+            $('#orderByDate').change(function() {
+                loadNews();
+            });
+
+            function loadNews() {
+                var category = $('#filterCategory').val();
+                var order = $('#orderByDate').val();
+                
+                $.getJSON('{% url 'news:load_news' %}', {
+                    'category': category,
+                    'order': order
+                }).done(response => {
+                    newsList.html(response['html_from_view'])
+                })
+            }
+        });
+    </script>
 {% endblock %}

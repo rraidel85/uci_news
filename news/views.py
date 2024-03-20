@@ -5,6 +5,31 @@ from django.contrib import messages
 from django.urls import reverse_lazy, reverse
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from django.http import JsonResponse
+from django.template.loader import render_to_string
+
+def load_news(request):
+    category = request.GET.get('category', None)
+    order = request.GET.get('order', 'asc')
+    
+    if category != 'any':
+        news_items = News.objects.filter(category_id=category).order_by('-pub_date' if order == 'desc' else 'pub_date')
+    else:
+        news_items = News.objects.all().order_by('-pub_date' if order == 'desc' else 'pub_date')
+
+    # context = {'news': news_items}
+    # html = render(request, 'news/news_list_items.html', context).content.decode('utf-8')
+
+    print(news_items)
+    html = render_to_string(
+            template_name="news/news_list_items.html", 
+            context={"news": news_items}
+        )
+
+    data_dict = {"html_from_view": html}
+
+    return JsonResponse(data=data_dict, safe=False)
 
 class NewsListView(ListView):
     model = News

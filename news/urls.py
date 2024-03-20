@@ -11,7 +11,7 @@ urlpatterns = [
     path('noticias/editar/<int:pk>/', views.NewsUpdateView.as_view(), name='edit'),
     path('noticias/<int:pk>/', views.NewsDetailView.as_view(), name='detail'),
     path('noticias/eliminar/<int:pk>/', views.NewsDeleteView.as_view(), name='delete'),
-    
+    path('cargar_noticias/', views.load_news, name='load_news'),
     #Category
     path('tematicas', views.CategoryListView.as_view(), name='category_list'),
     path('tematicas/crear/', views.CategoryCreateView.as_view(), name='category_create'),
