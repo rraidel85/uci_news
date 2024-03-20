@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- Row -->
+    <div class="row">
+        <div class="col-md-9">
+            <a href="{% url 'news:category_list' %}" class="btn btn-success mb-3">
+                <i class="fa fa-list-alt"></i>
+                Administrar</a>
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Crear Temática</h3>
+                    <p class="card-text">Introduzca los datos en el formulario.</p>
+
+                    {% load form_generic %}
+                    {% form_generic form=form %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Row -->
+{% endblock %}
+
+{% block page_js %}
+    {% include "form_generic/form_generic_script.html" %}
+{% endblock %}

@@ -116,7 +116,7 @@ class CategoryDeleteView(PermissionRequiredMixin, DeleteView):
     permission_required = 'news.delete_category'
 
     def get(self, request, pk):
-        item = get_object_or_404(News, pk=pk)
+        item = get_object_or_404(Category, pk=pk)
         item.delete()
         messages.success(self.request, 'Temática eliminada correctamente')
         return HttpResponseRedirect(reverse('news:category_list'))
