@@ -35,13 +35,13 @@
                     <h5 class="card-title" style="font-weight:bold">{{ n.title }}</h5>
                     <div style="display:flex; gap: 1rem">
                                         <a title="Editar" class="btn btn-outline-success btn-rounded"
-                                           href="{% url 'news:edit' 1 %}">
+                                           href="{% url 'news:edit' n.id %}">
                                             <i class="fa fa-pencil-alt"></i>
                                         </a>
                     <a title="Eliminar" class="btn btn-outline-danger btn-rounded"
                                            data-toggle="modal"
                                            data-target="#bs-example-modal-sm"
-                                           onclick="delete_modal('{% url 'news:delete' 2 %}')"
+                                           onclick="delete_modal('{% url 'news:delete' n.id %}')"
                                            href="#">
                                            <i class="fa fa-trash" style=""></i>
                                         </a>
@@ -57,7 +57,7 @@
                             <p>{{ n.content }}</p>
                         </div>
                     </div>
-                <div style="display:flex; flex-direction:row-reverse"><a class="btn btn-primary" href="{% url 'news:detail' 1 %}">Más información</a></div>
+                <div style="display:flex; flex-direction:row-reverse"><a class="btn btn-primary" href="{% url 'news:detail' n.id %}">Más información</a></div>
             </div>
         </div>
         {% endfor %}
