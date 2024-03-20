@@ -30,10 +30,9 @@ class NewsListAdminView(PermissionRequiredMixin, ListView):
         context['categories'] = Category.objects.all()
         return context
     
-class NewsDetailView(PermissionRequiredMixin, DetailView):
+class NewsDetailView(DetailView):
     model = News
     template_name = 'news/news_detail.html'
-    permission_required = 'news.view_news'
     context_object_name = 'news'
 
 class NewsCreateView(PermissionRequiredMixin, CreateView):
