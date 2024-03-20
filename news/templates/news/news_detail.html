@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <a href="{% url 'news:list' %}" class="btn btn-success mb-3">
+                <i class="fa fa-list-alt"></i>
+                Administrar</a>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Detalles Noticia</h4>
+                    <br>
+                    <h4><b>Título: </b>{{ news.title }}</h4>
+                    <h4><b>Fuente: </b>{{ news.source }}</h4>
+                    <h4><b>Contenido: </b>{{ news.content }}</h4>
+                    <h4><b>URL: </b><a href="{{ news.url }}">Ir al sitio</a></h4>
+                    <h4><b>Género: </b>{{ news.gender }}</h4>
+                    <h4><b>Idioma: </b>{{ news.language }}</h4>
+                    <h4><b>Postura: </b>{{ news.ideological_stance }}</h4>
+                    <h4><b>Tematica: </b>{{ news.category.name }}</h4>
+                    <h4><b>Descriptor: </b>{{ news.descriptor|capfirst }}</h4>
+                    <h4><b>Autores: </b></h4>
+                    {% for author in news.authors.all %}
+                        
+                        {% if author.first_name %}
+                            <h4>{{ author.first_name }} {{ author.last_name }}</h4>
+                        {% else %}
+                            <h4>{{ author.username }}</h4>
+                        {% endif %}
+                            
+                    {% endfor %}
+                        
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
