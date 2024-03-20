@@ -60,6 +60,8 @@
                 <div style="display:flex; flex-direction:row-reverse"><a class="btn btn-primary" href="{% url 'news:detail' n.id %}">Más información</a></div>
             </div>
         </div>
+        {% empty %}
+            <h2 style="text-align:center; font-weight:bold;">No hay noticias para mostrar</h2>
         {% endfor %}
     </div>
 
