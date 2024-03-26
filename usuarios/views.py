@@ -6,7 +6,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.views import View
-
+from django.views.generic import FormView
+from usuarios.forms import UpdateProfileForm
 
 class UserLoginView(LoginView):
     def form_valid(self, form):
@@ -32,3 +33,22 @@ class ProfileDetailView(LoginRequiredMixin, View):
 class CustomLogoutView(LogoutView):
     next_page = reverse_lazy('news:list')
 
+class ProfileUpdateView(LoginRequiredMixin, FormView):
+    template_name = 'usuarios/profile/profile_update.html'
+
+    def get_form(self):
+        return UpdateProfileForm(instance=self.request.user)
+
+    def post(self, request, *args, **kwargs):
+        form = UpdateProfileForm(request.POST, instance=self.request.user)
+
+        if form.is_valid():
+            form.save()
+            messages.success(self.request, 'Perfil actualizado correctamente.')
+            return HttpResponseRedirect(reverse('usuarios:perfil'))
+        else:
+            messages.error(self.request, 'Existen errores en el formulario.')
+            return self.get(self, request)
+
+    def get_success_url(self):
+        return reverse_lazy('usuarios:perfil')

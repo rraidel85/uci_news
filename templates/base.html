@@ -139,26 +139,29 @@
                                         
                         </a>
                         <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
-                            {% comment %} <a class="dropdown-item" href=""><i data-feather="user"
-                                                                                           class="svg-icon mr-2 ml-1"></i>
-                                Perfil</a>
-
-                            <a class="dropdown-item" href=""><i data-feather="repeat"
-                                                                                                  class="svg-icon mr-2 ml-1"></i>
-                                Cambiar contraseña</a> {% endcomment %}
                                 {% if not user.is_authenticated %}
                             <a class="dropdown-item" href="{% url 'usuarios:login' %}"><i data-feather="user"
                                                                       class="svg-icon mr-2 ml-1"></i>
                                 Iniciar sesión</a>
 
                                 {% else %}
-                            <form method="post" action="{% url 'usuarios:logout' %}">
-                                {% csrf_token %}
-                                <button type="submit" class="dropdown-item">
-                                    <i data-feather="power" class="svg-icon mr-2 ml-1"></i>
-                                    Cerrar sesión
-                                </button>
-                            </form>
+                                <a class="dropdown-item" href="{% url 'usuarios:perfil' %}"><i data-feather="user"
+                                    class="svg-icon mr-2 ml-1"></i>
+                                Perfil</a>
+                                <a class="dropdown-item" href="{% url 'usuarios:cambiar_clave' %}"><i data-feather="repeat"
+                                           class="svg-icon mr-2 ml-1"></i>
+                                    Cambiar contraseña</a> 
+                                <a class="dropdown-item" href="{% url 'usuarios:editar_perfil' %}"><i
+                                            data-feather="settings"
+                                                    class="svg-icon mr-2 ml-1"></i>
+                                        Editar perfil</a>
+                                <form method="post" action="{% url 'usuarios:logout' %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="dropdown-item">
+                                        <i data-feather="power" class="svg-icon mr-2 ml-1"></i>
+                                        Cerrar sesión
+                                    </button>
+                                </form>
                             {% endif %}
                         </div>
                     </li>
