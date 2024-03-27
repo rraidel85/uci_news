@@ -1,7 +1,8 @@
 from django.contrib import messages
-from django.contrib.auth import views
+from django.contrib.auth import views, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.models import Group
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
@@ -24,7 +25,10 @@ class RegisterView(CreateView):
 
     def form_valid(self, form):
         user = form.save()
-
+        lector_group = Group.objects.get(name='Lector')
+        lector_group.user_set.add(user)
+        # Log in the user
+        login(self.request, user)
         return super().form_valid(form)
 
 class PasswordChangeDoneView(LoginRequiredMixin, views.PasswordChangeDoneView):
