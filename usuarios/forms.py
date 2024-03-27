@@ -8,7 +8,9 @@ from usuarios.models import CustomUser
 class UpdateProfileForm(forms.ModelForm):
     class Meta:
         model = CustomUser
-        fields = ['first_name', 'last_name', 'email']
+        fields = ['first_name', 'last_name', 'email', 
+                  "phone_number", "street", "number",
+                  "zone", "category", "experience"]
         
 
 class RegisterForm(UserCreationForm):

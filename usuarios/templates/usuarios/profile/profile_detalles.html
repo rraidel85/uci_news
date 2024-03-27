@@ -18,6 +18,14 @@
                     <h4><b>Nombre: </b>{{ user.first_name }}</h4>
                     <h4><b>Apellidos: </b>{{ user.last_name }}</h4>
                     <h4><b>Correo electrónico: </b>{{ user.email }}</h4>
+                    <h4><b>Teléfono: </b>{{ user.phone_number }}</h4>
+                    <h4><b>Dirección: </b>{{ user.street }} {{ user.number }} {{ user.zone }}</h4>
+                    {% if  user.category%}     
+                        <h4><b>Categoría Científica: </b>{{ user.category }}</h4>
+                    {% endif %}
+                    {% if  user.experience%}     
+                        <h4><b>Años de experiencia: </b>{{ user.experience }}</h4>
+                    {% endif %}
                     <h4><b>Nivel de acceso: </b>{{ user.groups.get }}</h4>
                 </div>
             </div>
