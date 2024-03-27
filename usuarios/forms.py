@@ -1,14 +1,24 @@
 from django.contrib.auth import password_validation
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from django.contrib.auth.forms import UserCreationForm
 from django import forms
-
+from usuarios.models import CustomUser
 
 class UpdateProfileForm(forms.ModelForm):
     class Meta:
-        model = User
+        model = CustomUser
         fields = ['first_name', 'last_name', 'email']
+        
 
+class RegisterForm(UserCreationForm):
+
+    class Meta:
+        model = CustomUser
+        fields = ["username", 'first_name', 'last_name', 'email', 
+                  "password1", "password2", "phone_number", "street", "number",
+                  "zone", "category", "experience"]
+        
 
 class UserPasswordChangeForm(forms.Form):
     """

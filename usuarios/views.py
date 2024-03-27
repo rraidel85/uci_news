@@ -6,8 +6,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.views import View
-from django.views.generic import FormView
-from usuarios.forms import UpdateProfileForm
+from django.views.generic import FormView, CreateView
+from usuarios.forms import UpdateProfileForm, RegisterForm
 
 class UserLoginView(LoginView):
     def form_valid(self, form):
@@ -16,6 +16,16 @@ class UserLoginView(LoginView):
 
     def get_success_url(self):
         return reverse_lazy('news:list')
+
+class RegisterView(CreateView):
+    form_class = RegisterForm
+    template_name = "usuarios/register.html"
+    success_url = reverse_lazy("news:list")
+
+    def form_valid(self, form):
+        user = form.save()
+
+        return super().form_valid(form)
 
 class PasswordChangeDoneView(LoginRequiredMixin, views.PasswordChangeDoneView):
 

@@ -17,7 +17,7 @@
                     <div class="auth-box">
                         <div class="row m-b-20">
                             <div class="col-md-6" style="display:flex; align-items:center;">
-                                <h3 class="text-center txt-primary">Iniciar sesión</h3>
+                                <h3 class="text-center txt-primary">Regístrate</h3>
                             </div>
                             <div class="col-md-6 logo-mes">
                                 <img width="180px" src="{% static 'plantilla/assets/images/login/UCI_Logo.png' %}"
@@ -25,9 +25,9 @@
                             </div>
                         </div>
                         <hr/>
-                        {% if form.errors %}
-                            <p class="text-center text-danger">Credenciales incorrectas. Inténtelo de nuevo.</p>
-                        {% endif %}
+                        {% comment %} {% if form.errors %}
+                            <p class="text-center text-danger">Hay errores en el formulario.</p>
+                        {% endif %} {% endcomment %}
 
                         {% for field in form.visible_fields %}
                             <div class="text-left">
@@ -38,7 +38,7 @@
 
                                 {% if field.errors %}
                                     {% for error in field.errors %}
-                                        <p class="text-danger">{{ error|escape }}</p>
+                                        <div><p class="text-danger">{{ error|escape }}</p></div>
                                     {% endfor %}
                                 {% endif %}
                                 <span class="md-line"></span>
@@ -49,7 +49,7 @@
                             <div class="col-md-12">
                                 <button type="submit"
                                         class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">
-                                    Iniciar sesión
+                                    Aceptar
                                 </button>
                             </div>
                         </div>
@@ -57,7 +57,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="login-link">
-                                    <a class="text-left" href="{% url 'usuarios:register'%}">Crear nuevo usuario</a>
+                                    <a class="text-left" href="{% url 'usuarios:login'%}">Ir a iniciar sesión</a>
                                 </div>
                                 <p class="text-inverse text-left m-b-0">Sistema Informático para la gestión de noticias</p>
                                 <p class="text-inverse text-left"><b>UCI Universidad de las Ciencias Informáticas. Cuba</b></p>
