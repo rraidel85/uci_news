@@ -44,3 +44,8 @@ b, strong {
 .form-control {
     border: 1px solid #91a7bd;
 }
+
+/*Textarea de contenido*/
+#id_content{
+    width: 100%;
+}

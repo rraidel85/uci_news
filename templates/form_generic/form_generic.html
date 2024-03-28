@@ -4,7 +4,13 @@
 
         <div class="row">
             {% for field in form.visible_fields %}
-                <div class="col-md-{{ column_size }} mb-4">
+                
+                {% if field.id_for_label == 'id_content' %}
+                    <div class="col-md-12 mb-4">
+                {% else %}
+                    <div class="col-md-{{ column_size }} mb-4">
+                {% endif %} 
+                    
                     {{ field.label_tag }}
                     <br>
                     {{ field }}
